@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Khám phá danh lam thắng cảnh, di tích lịch sử ngàn năm, ẩm thực độc đáo và bản đồ du lịch Việt Nam.">
+  <title>Việt Nam Trong Tôi | Khám phá Du lịch, Di tích & Ẩm thực</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-header: rgba(255, 255, 255, 0.95);
+      --primary-red: #da251d;
+      --primary-gold: #b45309;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --border-color: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background-color: var(--bg-main);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* HEADER SÁNG */
+    .header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 70px;
+      background: var(--bg-header);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      z-index: 1000;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none; color: var(--text-main);
+      font-weight: 800; font-size: 1.1rem; letter-spacing: 0.5px;
+    }
+    .brand-logo { height: 40px; width: auto; }
+    .brand small { display: block; font-size: 0.65rem; color: var(--primary-red); font-weight: 700; letter-spacing: 1px; }
+    
+    .nav { display: flex; gap: 24px; }
+    .nav a {
+      text-decoration: none; color: var(--text-muted);
+      font-weight: 600; font-size: 0.9rem; transition: all 0.2s;
+    }
+    .nav a:hover { color: var(--primary-red); }
+
+    .header-cta {
+      background: var(--primary-red); color: #fff;
+      padding: 8px 18px; border-radius: 20px;
+      text-decoration: none; font-size: 0.85rem; font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .header-cta:hover { background: #b91c1c; transform: translateY(-1px); }
+    .menu-toggle { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text-main); cursor: pointer; }
+
+    /* HERO SECTION */
+    .hero {
+      position: relative;
+      padding: 130px 5% 70px;
+      background: linear-gradient(135deg, #fff5f5 0%, #fef3c7 50%, #f1f5f9 100%);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .hero-content { max-width: 800px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.75rem; font-weight: 700; color: var(--primary-red);
+      letter-spacing: 1.5px; margin-bottom: 16px;
+      background: rgba(218, 37, 29, 0.08); padding: 4px 12px; border-radius: 12px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight: 800;
+      line-height: 1.2; color: #0f172a; margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: var(--primary-red); }
+    .hero-desc { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 32px; max-width: 640px; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 8px; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary-red); color: #fff; box-shadow: 0 4px 12px rgba(218, 37, 29, 0.25); }
+    .btn-primary:hover { background: #b91c1c; transform: translateY(-2px); }
+    .btn-dark { background: #0f172a; color: #fff; }
+
+    /* LAYOUT BỐ CỤC */
+    .section-wrap { padding: 60px 5%; max-width: 1300px; margin: 0 auto; }
+    .section-kicker { font-size: 0.8rem; font-weight: 800; color: var(--primary-red); letter-spacing: 1.5px; margin-bottom: 12px; }
+    .section-heading { margin-bottom: 36px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px; }
+    .section-heading h2 { font-size: 2rem; font-weight: 800; }
+    .section-heading h2 em { font-style: normal; color: var(--primary-gold); }
+
+    /* BỘ LỌC */
+    .filters { display: flex; gap: 10px; margin-bottom: 32px; flex-wrap: wrap; }
+    .filter {
+      padding: 8px 18px; border-radius: 20px; border: 1px solid var(--border-color);
+      background: #fff; color: var(--text-muted); font-weight: 600; font-size: 0.85rem;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .filter:hover, .filter.active { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+
+    /* CARDS */
+    .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 28px; }
+    .destination-card {
+      background: var(--bg-card); border-radius: 12px; border: 1px solid var(--border-color);
+      overflow: hidden; box-shadow: var(--shadow-sm); transition: transform 0.3s, box-shadow 0.3s;
+      display: flex; flex-direction: column;
+    }
+    .destination-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+    .card-image { position: relative; width: 100%; height: 220px; background: #e2e8f0; }
+    .card-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    
+    .region-tag {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(255, 255, 255, 0.95); color: #0f172a;
+      font-size: 0.65rem; font-weight: 800; padding: 4px 10px; border-radius: 4px;
+    }
+    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta { font-size: 0.75rem; font-weight: 700; color: var(--primary-gold); margin-bottom: 6px; display: flex; justify-content: space-between; }
+    .card-body h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
+    .card-body p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex: 1; }
+
+    .detail-btn {
+      background: #f1f5f9; color: #0f172a; border: 1px solid var(--border-color);
+      padding: 10px 16px; border-radius: 6px; font-weight: 600; font-size: 0.85rem;
+      cursor: pointer; width: 100%; display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.2s;
+    }
+    .detail-btn:hover { background: var(--primary-red); color: #fff; border-color: var(--primary-red); }
+
+    /* FOOTER */
+    .footer {
+      background: #ffffff; border-top: 1px solid var(--border-color);
+      padding: 40px 5%; text-align: center; color: var(--text-muted); font-size: 0.85rem;
+    }
+    .footer-brand { justify-content: center; margin-bottom: 12px; }
+
+    /* MODAL POPUP */
+    .modal {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      display: none; align-items: center; justify-content: center;
+      z-index: 2000; padding: 20px;
+    }
+    .modal.active { display: flex; }
+    .modal-backdrop { position: absolute; inset: 0; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(4px); }
+    .modal-panel {
+      position: relative; background: #fff; border-radius: 12px;
+      max-width: 600px; width: 100%; padding: 28px; box-shadow: var(--shadow-lg);
+      z-index: 10; max-height: 90vh; overflow-y: auto;
+    }
+    .modal-close {
+      position: absolute; top: 16px; right: 16px; background: #f1f5f9;
+      border: none; width: 32px; height: 32px; border-radius: 50%;
+      font-size: 1.2rem; cursor: pointer; color: #475569;
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .nav.active { display: flex; position: absolute; top: 70px; left: 0; right: 0; background: #fff; flex-direction: column; padding: 20px; border-bottom: 1px solid var(--border-color); }
+      .menu-toggle { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER LOGO PTIT -->
+  <header class="header" id="top">
+    <a class="brand" href="#top">
+      <img class="brand-logo" src="ptit-logo.png" alt="Logo PTIT">
+      <span>VIỆT NAM <small>TRONG TÔI</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">☰</button>
+    <nav class="nav" id="nav">
+      <a href="#top">Trang chủ</a>
+      <a href="#destinations">Danh thắng (15)</a>
+      <a href="#heritage">Di tích (10)</a>
+      <a href="#food">Ẩm thực (10)</a>
+      <a href="#videos">Video</a>
+    </nav>
+    <a class="header-cta" href="#destinations">Khám phá ngay <span>↗</span></a>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> VẺ ĐẸP BẤT TẬN CỦA DẢI ĐẤT HÌNH CHỮ S</p>
+        <h1>Mỗi hành trình<br>là một <em>niềm tự hào.</em></h1>
+        <p class="hero-desc">Hành trình khám phá 15 danh lam thắng cảnh kỳ vĩ, 10 di tích lịch sử ngàn năm văn hiến và 10 tinh hoa ẩm thực trứ danh 3 miền.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#destinations">Khám phá 15 danh thắng <span>→</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- 01. LỜI MỜI KHÁM PHÁ (ĐÃ ĐƯỢC ĐỔI THÀNH GIAO DIỆN GRID 2 CỘT MỚI) -->
+    <!-- ======================================================== -->
+    <section class="intro section-wrap" id="about">
+      <div style="background: #ffffff; border-radius: 16px; padding: 40px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0,0,0,0.03);">
+        
+        <div class="section-kicker">01 — LỜI MỜI KHÁM PHÁ</div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center;">
+          
+          <!-- CỘT TRÁI: TIÊU ĐỀ & LỜI DẪN -->
+          <div>
+            <h2 style="font-size: 2.2rem; font-weight: 800; color: #0f172a; line-height: 1.25; margin-bottom: 18px;">
+              Việt Nam – <br>
+              vẻ đẹp hội tụ <br>
+              <span style="color: #da251d; font-style: italic; background: linear-gradient(120deg, rgba(218,37,29,0.1) 0%, rgba(218,37,29,0) 100%); padding: 0 8px; border-radius: 4px;">
+                ngàn sắc màu.
+              </span>
+            </h2>
+            
+            <p style="color: #475569; font-size: 0.95rem; line-height: 1.7; margin-bottom: 14px;">
+              Trải qua hàng ngàn năm dựng nước và giữ nước, Việt Nam tự hào sở hữu hệ thống di tích lịch sử hào hùng, tài nguyên thiên nhiên tươi đẹp và kho tàng ẩm thực vô cùng phong phú.
+            </p>
+            
+            <p style="color: #64748b; font-size: 0.85rem; line-height: 1.6; margin-bottom: 24px; background: #f8fafc; padding: 10px 14px; border-left: 3px solid #da251d; border-radius: 0 6px 6px 0;">
+              💡 Nhấn nút <strong>"Khám phá chi tiết"</strong> ở từng địa danh để mở bản đồ Google Maps chỉ đường và xem cẩm nang chi tiết.
+            </p>
+
+            <a href="#destinations" style="display: inline-flex; align-items: center; gap: 8px; background: #da251d; color: #ffffff; padding: 12px 26px; border-radius: 30px; font-weight: 600; text-decoration: none; box-shadow: 0 4px 14px rgba(218,37,29,0.25); transition: transform 0.2s;">
+              Bắt đầu hành trình <span style="font-size: 1.1rem;">↗</span>
+            </a>
+          </div>
+
+          <!-- CỘT PHẢI: KHUNG THỐNG KÊ 3 Ô ẤN TƯỢNG -->
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            
+            <div style="background: #fff5f5; border: 1px solid #fecaca; border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 2.2rem; font-weight: 800; color: #da251d; line-height: 1;">15+</div>
+              <div style="font-size: 0.75rem; font-weight: 700; color: #991b1b; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Danh thắng kỳ vĩ</div>
+            </div>
+
+            <div style="background: #fef3c7; border: 1px solid #fde68a; border-radius: 12px; padding: 20px; text-align: center;">
+              <div style="font-size: 2.2rem; font-weight: 800; color: #b45309; line-height: 1;">10+</div>
+              <div style="font-size: 0.75rem; font-weight: 700; color: #78350f; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Di tích ngàn năm</div>
+            </div>
+
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 20px; text-align: center; grid-column: span 2;">
+              <div style="font-size: 2.2rem; font-weight: 800; color: #166534; line-height: 1;">10+</div>
+              <div style="font-size: 0.75rem; font-weight: 700; color: #14532d; margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Tinh hoa ẩm thực 3 miền</div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 02. 15 DANH LAM THẮNG CẢNH -->
+    <section class="destinations section-wrap" id="destinations">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">02 — 15 DANH LAM THẮNG CẢNH KỲ VĨ</div>
+          <h2>Tuyệt tác <em>thiên nhiên Việt Nam</em></h2>
+        </div>
+        <p>Chọn miền để lọc 15 tọa độ danh lam thắng cảnh nổi tiếng.</p>
+      </div>
+      
+      <!-- BỘ LỌC MIỀN -->
+      <div class="filters" id="filters">
+        <button class="filter active" data-filter="all">Tất cả (15)</button>
+        <button class="filter" data-filter="north">Miền Bắc (5)</button>
+        <button class="filter" data-filter="central">Miền Trung (5)</button>
+        <button class="filter" data-filter="south">Miền Nam (5)</button>
+      </div>
+
+      <div class="cards" id="destinationGrid">
+        <!-- 1. HẠ LONG -->
+        <article class="destination-card" data-region="north">
+          <div class="card-image">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23e0f2fe'/><path d='M0,350 Q200,300 400,380 T800,320 L800,500 L0,500 Z' fill='%230284c7'/><path d='M150,380 Q250,200 350,380 Z' fill='%23065f46'/><path d='M450,400 Q550,160 650,400 Z' fill='%23047857'/><text x='50%' y='35%' font-family='sans-serif' font-size='32' font-weight='bold' fill='%230f172a' text-anchor='middle'>Vịnh Hạ Long</text></svg>" alt="Vịnh Hạ Long">
+            <span class="region-tag">MIỀN BẮC</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">QUẢNG NINH <span>01</span></div>
+            <h3>1. Vịnh Hạ Long</h3>
+            <p>Kỳ quan thiên nhiên thế giới với hàng nghìn đảo đá vôi xanh ngắt trên sóng nước bồng bềnh.</p>
+            <button class="detail-btn" data-title="Vịnh Hạ Long" data-location="Quảng Ninh" data-desc="Di sản thiên nhiên thế giới UNESCO sở hữu hàng ngàn hòn đảo đá vôi hình thù kỳ thú như Hòn Gà Chọi, Đỉnh Hương." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d119330.1264850684!2d107.0094056!3d20.9100827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x314a5796245d8b8d%3A0x6b8f36c5890bf258!2sHa%20Long%20Bay!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+
+        <!-- 2. SA PA -->
+        <article class="destination-card" data-region="north">
+          <div class="card-image">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23f1f5f9'/><polygon points='0,500 200,180 400,500' fill='%2394a3b8'/><polygon points='250,500 500,100 750,500' fill='%2364748b'/><text x='50%' y='35%' font-family='sans-serif' font-size='32' font-weight='bold' fill='%230f172a' text-anchor='middle'>Sa Pa & Fansipan</text></svg>" alt="Sa Pa">
+            <span class="region-tag">MIỀN BẮC</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">LÀO CAI <span>02</span></div>
+            <h3>2. Sa Pa & Đỉnh Fansipan</h3>
+            <p>Thị trấn mờ sương, ruộng bậc thang kỳ vĩ và nóc nhà Đông Dương cao 3.143m.</p>
+            <button class="detail-btn" data-title="Sa Pa & Fansipan" data-location="Lào Cai" data-desc="Quyến rũ bởi khí hậu lạnh giá mờ sương, bản Cát Cát thanh bình và đỉnh Fansipan hùng vĩ." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d59247.97011929315!2d103.8118022!3d22.3363606!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36cd416274452093%3A0xc3cb77a16e2eb9d9!2sSa%20Pa%2C%20Lao%20Cai!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+
+        <!-- 3. TRÀNG AN -->
+        <article class="destination-card" data-region="north">
+          <div class="card-image">
+            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23ecfdf5'/><path d='M0,400 Q400,250 800,400 L800,500 L0,500 Z' fill='%2310b981'/><text x='50%' y='35%' font-family='sans-serif' font-size='32' font-weight='bold' fill='%230f172a' text-anchor='middle'>Quần thể Tràng An</text></svg>" alt="Tràng An Ninh Bình">
+            <span class="region-tag">MIỀN BẮC</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta">NINH BÌNH <span>03</span></div>
+            <h3>3. Quần thể Tràng An</h3>
+            <p>Vịnh Hạ Long trên cạn với những dòng sông ngầm xuyên qua lòng núi đá vôi uốn lượn.</p>
+            <button class="detail-btn" data-title="Quần thể Tràng An" data-location="Ninh Bình" data-desc="Di sản thế giới hỗn hợp duy nhất tại Đông Nam Á với cảnh quan sông nước mây trời." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3744.15372138243!2d105.9038889!3d20.2527778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313679d6718d052b%3A0xbbf6f2b7bdfb2b2b!2zVHLDoG5nIEFu!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 03. 10 DI TÍCH LỊCH SỬ NGÀN NĂM -->
+    <section class="heritage section-wrap" id="heritage">
+      <div class="section-heading">
+        <div>
+          <div class="section-kicker">03 — DẤU ẤN LỊCH SỬ</div>
+          <h2>10 Di tích <em>lịch sử ngàn năm</em></h2>
+        </div>
+        <p>Những di sản kiến trúc ngàn năm gắn liền với bề dày văn hiến hào hùng.</p>
+      </div>
+
+      <div class="cards">
+        <article class="destination-card">
+          <div class="card-image"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23f8fafc'/><text x='50%' y='50%' font-family='sans-serif' font-size='28' font-weight='bold' fill='%230f172a' text-anchor='middle'>Hoàng Thành Thăng Long</text></svg>" alt="Hoàng thành Thăng Long"><span class="region-tag">HÀ NỘI</span></div>
+          <div class="card-body">
+            <div class="card-meta">DI SẢN UNESCO <span>01</span></div>
+            <h3>1. Hoàng thành Thăng Long</h3>
+            <p>Trung tâm quyền lực chính trị trải dài qua 13 thế kỷ triều đại phong kiến Việt Nam.</p>
+            <button class="detail-btn" data-title="Hoàng thành Thăng Long" data-location="Hà Nội" data-desc="Nơi lưu giữ dấu vết các thời kỳ Lý, Trần, Lê, Nguyễn." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.9056!2d105.8385!3d21.0364!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135aba645555555%3A0x62a1b913d803683a!2zSG_DoG5nIHRow6BuaCBUaMSDbmcgTG9uZw!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="card-image"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23f8fafc'/><text x='50%' y='50%' font-family='sans-serif' font-size='28' font-weight='bold' fill='%230f172a' text-anchor='middle'>Cố Đô Huế</text></svg>" alt="Cố đô Huế"><span class="region-tag">THỪA THIÊN HUẾ</span></div>
+          <div class="card-body">
+            <div class="card-meta">DI SẢN UNESCO <span>02</span></div>
+            <h3>2. Quần thể Cố đô Huế</h3>
+            <p>Kinh đô triều Nguyễn với Ngọ Môn, Tử Cấm Thành và hệ thống lăng tẩm hoàng gia cổ kính.</p>
+            <button class="detail-btn" data-title="Cố đô Huế" data-location="Thừa Thiên Huế" data-desc="Triều đại phong kiến cuối cùng với Đại Nội cổ kính." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3826.3533!2d107.5758!3d16.4686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3141a139a039efbd%3A0x6295ef0c8db4b830!2zxJDhuqFpIE7hu5lpIEh14bq_!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="card-image"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'><rect width='100%' height='100%' fill='%23f8fafc'/><text x='50%' y='50%' font-family='sans-serif' font-size='28' font-weight='bold' fill='%230f172a' text-anchor='middle'>Phố Cổ Hội An</text></svg>" alt="Phố cổ Hội An"><span class="region-tag">QUẢNG NAM</span></div>
+          <div class="card-body">
+            <div class="card-meta">ĐÔ THỊ CỔ <span>03</span></div>
+            <h3>3. Phố cổ Hội An</h3>
+            <p>Thương cảng quốc tế thế kỷ 16 preserved nguyên vẹn mái ngói rêu phong và Chùa Cầu.</p>
+            <button class="detail-btn" data-title="Phố cổ Hội An" data-location="Quảng Nam" data-desc="Nơi giao thoa văn hóa thương cảng cổ Đông Tây." data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3837.5878!2d108.3276!3d15.8777!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31420dd4e1355555%3A0xd68916e7887e220!2zUGjhu5EgY-G7lSBI4buZaSBBbg!5e0!3m2!1svi!2svn!4v1700000000000">Khám phá chi tiết <span>↗</span></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER LOGO PTIT -->
+    <footer class="footer">
+      <a class="brand footer-brand" href="#top">
+        <img class="brand-logo" src="ptit-logo.png" alt="Logo PTIT">
+        <span>VIỆT NAM <small>TRONG TÔI</small></span>
+      </a>
+      <p>Cẩm nang du lịch & di tích lịch sử Việt Nam</p>
+      <span style="margin-top:8px; display:block;">© 2026 — Học viện Công nghệ Bưu chính Viễn thông (PTIT)</span>
+    </footer>
+  </main>
+
+  <!-- MODAL POPUP SÁNG -->
+  <div class="modal" id="detailModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-panel">
+      <button class="modal-close" data-close aria-label="Đóng">×</button>
+      <div class="section-kicker">CẨM NANG CHI TIẾT</div>
+      <p class="modal-location" id="modalLocation" style="color: var(--primary-gold); font-weight:700; font-size:0.85rem; margin-bottom: 4px;"></p>
+      <h2 id="modalTitle" style="font-size: 1.6rem; margin-bottom: 12px; color: #0f172a;"></h2>
+      
+      <p id="modalDesc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; font-size: 0.95rem;"></p>
+
+      <div style="width: 100%; height: 220px; border-radius: 8px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border-color);">
+        <iframe id="modalMapFrame" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <button class="btn btn-dark" data-close style="width: 100%; justify-content: center;">Đóng cửa sổ</button>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.getElementById('menuToggle');
+      const nav = document.getElementById('nav');
+      if (menuToggle && nav) {
+        menuToggle.addEventListener('click', () => nav.classList.toggle('active'));
+      }
+
+      const filterButtons = document.querySelectorAll('.filter');
+      const cards = document.querySelectorAll('#destinationGrid .destination-card');
+
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+
+          const filterValue = this.getAttribute('data-filter');
+
+          cards.forEach(card => {
+            const cardRegion = card.getAttribute('data-region');
+            if (filterValue === 'all' || cardRegion === filterValue) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      const modal = document.getElementById('detailModal');
+      const modalTitle = document.getElementById('modalTitle');
+      const modalLocation = document.getElementById('modalLocation');
+      const modalDesc = document.getElementById('modalDesc');
+      const modalMapFrame = document.getElementById('modalMapFrame');
+
+      document.querySelectorAll('.detail-btn').forEach(button => {
+        button.addEventListener('click', function() {
+          modalTitle.textContent = this.getAttribute('data-title') || '';
+          modalLocation.textContent = this.getAttribute('data-location') || '';
+          modalDesc.textContent = this.getAttribute('data-desc') || '';
+          modalMapFrame.src = this.getAttribute('data-map') || '';
+          modal.classList.add('active');
+        });
+      });
+
+      document.querySelectorAll('[data-close]').forEach(el => {
+        el.addEventListener('click', () => {
+          modal.classList.remove('active');
+          modalMapFrame.src = '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
